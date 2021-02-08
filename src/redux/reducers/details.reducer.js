@@ -7,6 +7,5 @@ const detailsReducer = (state = {}, action) => {
     }
 };
 
-  // user will be on the redux state at:
   // state.details
 export default detailsReducer;

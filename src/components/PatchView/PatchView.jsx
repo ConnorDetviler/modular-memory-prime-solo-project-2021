@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import './PatchView.css';
 
 function PatchView() {
 
@@ -17,6 +18,10 @@ function PatchView() {
         dispatch({
             type: 'FETCH_DETAILS',
             payload: id
+        });
+
+        dispatch({
+            type: 'FETCH_PATCH_NAMES'
         });
     }, []);
 

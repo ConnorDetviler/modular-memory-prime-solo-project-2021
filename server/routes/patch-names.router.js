@@ -2,22 +2,19 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/:id', (req, res) => {
-
-    let id = Number(req.params.id)
+router.get('/', (req, res) => {
 
     const queryText = `
-        SELECT * FROM "patch"
-        WHERE "patch".id = $1;
+        SELECT "patch".id, "patch".title FROM "patch";
     `;
 
     pool
-    .query(queryText, [id])
+    .query(queryText)
     .then((result) => {
         res.send(result.rows)
     })
     .catch((err) => {
-        console.error("Error completing SELECT details query", err);
+        console.error("Error completing SELECT patch names query", err);
         res.sendStatus(500)
     })
 });
