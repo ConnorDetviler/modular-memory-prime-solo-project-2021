@@ -107,7 +107,7 @@ function App() {
           <ProtectedRoute
             // PatchView is the home view for my app
             // Will show list of patches on the left
-            // Will display a patch front and center
+            // Will display a patch with details front and center
             exact
             path="/patchview"
           >
