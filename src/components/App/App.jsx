@@ -105,7 +105,9 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+            // PatchView is the home view for my app
+            // Will show list of patches on the left
+            // Will display a patch front and center
             exact
             path="/patchview"
           >
