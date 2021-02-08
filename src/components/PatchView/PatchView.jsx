@@ -21,7 +21,11 @@ function PatchView() {
     }, []);
 
     return (
-        <button onClick={viewDetails}>Patch Details</button>
+        <div>
+            <h1>{patchDetails.title}</h1>
+            <img src={patchDetails.patch_image} />
+            <p>{patchDetails.patch_notes}</p>
+        </div>
     )
 }
 
