@@ -7,6 +7,12 @@ function PatchView() {
 
     const dispatch = useDispatch();
 
+    const patchDetails = useSelector((store) => store.details)
+
+    const viewDetails = () => {
+        console.log(patchDetails);
+    }
+
     useEffect(() => {
         dispatch({
             type: 'FETCH_DETAILS',
@@ -15,7 +21,7 @@ function PatchView() {
     }, []);
 
     return (
-        <p>you made it to patchview</p>
+        <button onClick={viewDetails}>Patch Details</button>
     )
 }
 
