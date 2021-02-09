@@ -20,6 +20,8 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+import PatchView from '../PatchView/PatchView';
+
 import './App.css';
 
 function App() {
@@ -100,6 +102,16 @@ function App() {
             authRedirect="/user"
           >
             <LandingPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // PatchView is the home view for my app
+            // Will show list of patches on the left
+            // Will display a patch with details front and center
+            exact
+            path="/patchview"
+          >
+            <PatchView />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}

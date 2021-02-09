@@ -10,6 +10,7 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <LogOutButton className="btn" />
+      {/* <button className="btn">Patch View</button> */}
     </div>
   );
 }
