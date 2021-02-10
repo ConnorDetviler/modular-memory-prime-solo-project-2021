@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import PatchView from '../PatchView/PatchView';
+import PatchEdit from '../PatchEdit/PatchEdit';
 
 import './App.css';
 
@@ -112,6 +113,14 @@ function App() {
             path="/patchview"
           >
             <PatchView />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+            exact
+            path="/patch-edit"
+          >
+            <PatchEdit />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
