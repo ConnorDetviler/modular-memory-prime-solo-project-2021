@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import detailsSaga from './details.saga';
 import patchNamesSaga from './patchnames.saga';
 import editSaga from './edit.saga';
+import fetchAllPatchesSaga from './all-patches.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     detailsSaga(),
     patchNamesSaga(),
     editSaga(),
+    fetchAllPatchesSaga(),
   ]);
 }
