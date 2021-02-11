@@ -1,11 +1,13 @@
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function PatchEdit() {
 
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const userID = useSelector((store) => store.user.id)
 
     let [patch, setPatch] = useState({
         title: '',
@@ -27,9 +29,9 @@ function PatchEdit() {
             title: '',
             patch_notes: '',
             patch_image: '',
-            user_id: 2
-            // TODO: user_id should grab the id of the current user
+            user_id: userID
         })
+        history.push('/patch-view')
     }
 
     return (
@@ -61,8 +63,8 @@ function PatchEdit() {
             </form>
 
             <button onClick={
-                () => console.log(patch)
-            }>console log patch</button>
+                () => console.log(userID)
+            }>console log userID</button>
         </div>
     )
 }
