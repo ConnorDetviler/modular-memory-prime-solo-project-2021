@@ -1,10 +1,13 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-function* fetchPatchNames() {
-    console.log('in fetchPatchNames');
+function* fetchPatchNames(action) {
+
+    const user_id = action.payload;
+
+    console.log('in fetchPatchNames, user id is', user_id);
     try {
-        const namesGet = yield axios.get(`/api/patch-names/`)
+        const namesGet = yield axios.get(`/api/patch-names/${user_id}`)
         const patchNames = namesGet.data;
 
         console.log('patch names from router:', patchNames)

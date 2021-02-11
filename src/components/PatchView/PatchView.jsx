@@ -26,7 +26,7 @@ function PatchView() {
     // const id = 1 // placeholder - this is the patch's id
     const dispatch = useDispatch();
 
-
+    const userID = useSelector((store) => store.user.id)
     const patchDetails = useSelector((store) => store.details)
     const patchNames = useSelector((store) => store.names)
 
@@ -37,7 +37,8 @@ function PatchView() {
         });
 
         dispatch({
-            type: 'FETCH_PATCH_NAMES'
+            type: 'FETCH_PATCH_NAMES',
+            payload: userID
         });
     }, []);
 
