@@ -11,7 +11,7 @@ function* fetchAllPatches(action) {
         console.log('all patches from router:', patches)
 
         yield put({
-            type: 'SET_All_PATCHES',
+            type: 'SET_ALL_PATCHES',
             payload: patches
         })
     } catch (err) {
