@@ -31,6 +31,10 @@ function Nav() {
           Patch Edit
         </Link>
 
+        <Link className="navLink" to="/patch-manager">
+          Patch Manager
+        </Link>
+
         <Link className="navLink" to={loginLinkData.path}>
           {loginLinkData.text}
         </Link>

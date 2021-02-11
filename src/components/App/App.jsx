@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 import PatchView from '../PatchView/PatchView';
 import PatchEdit from '../PatchEdit/PatchEdit';
+import PatchManager from '../PatchManager/PatchManager';
 
 import './App.css';
 
@@ -121,6 +122,14 @@ function App() {
             path="/patch-edit"
           >
             <PatchEdit />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+
+            exact
+            path="/patch-manager"
+          >
+            <PatchManager />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
