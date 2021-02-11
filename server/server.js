@@ -11,6 +11,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const detailsRouter = require('./routes/details.router');
 const patchNamesRouter = require('./routes/patch-names.router');
+const patchRouter = require('./routes/patch.router');
 const { eventNames } = require('./modules/pool');
 
 // Body parser middleware
@@ -28,6 +29,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/details', detailsRouter);
 app.use('/api/patch-names', patchNamesRouter)
+app.use('/api/patch', patchRouter)
 
 // Serve static files
 app.use(express.static('build'));
