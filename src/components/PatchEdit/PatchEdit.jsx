@@ -23,13 +23,13 @@ function PatchEdit() {
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch({ type: "EDIT_PATCH", payload: patch })
-        // setPatch({
-        //     title: '',
-        //     patch_notes: '',
-        //     patch_image: '',
-        //     user_id: 2
-        //     // TODO: user_id should grab the id of the current user
-        // })
+        setPatch({
+            title: '',
+            patch_notes: '',
+            patch_image: '',
+            user_id: 2
+            // TODO: user_id should grab the id of the current user
+        })
     }
 
     return (
