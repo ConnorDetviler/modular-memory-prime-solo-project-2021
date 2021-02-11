@@ -2,7 +2,26 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import './PatchView.css';
 
+import {
+    Box,
+    Container,
+    List,
+    ListItem,
+    ListItemText,
+    makeStyles
+        } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: '100%',
+        maxWidth: 360,
+        backgroundColor: theme.palette.background.paper,
+    },
+}));
+
 function PatchView() {
+
+    const classes = useStyles();
 
     // const id = 1 // placeholder - this is the patch's id
     const dispatch = useDispatch();
@@ -31,23 +50,25 @@ function PatchView() {
 
     return (
         <div>
-            <div>
-                <ul>
-                    {patchNames.map(patch => {
-                        return (
-                            <li
-                                key={patch.id}
-                                onClick={() => patchClick(patch.id)}
-                            >
-                                {patch.title}
-                            </li>
-                        )
-                    })}
-                </ul>
-            </div>
-            <h1>{patchDetails.title}</h1>
-            <img src={patchDetails.patch_image} />
-            <p>{patchDetails.patch_notes}</p>
+            <Container>
+                <div>
+                    <List>
+                        {patchNames.map(patch => {
+                            return (
+                                <ListItem
+                                    key={patch.id}
+                                    onClick={() => patchClick(patch.id)}
+                                >
+                                    {patch.title}
+                                </ListItem>
+                            )
+                        })}
+                    </List>
+                </div>
+                <h1>{patchDetails.title}</h1>
+                <img src={patchDetails.patch_image} />
+                <p>{patchDetails.patch_notes}</p>
+            </Container>
         </div>
     )
 }
