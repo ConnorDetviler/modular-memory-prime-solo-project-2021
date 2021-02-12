@@ -13,8 +13,7 @@ function PatchEdit() {
         title: '',
         patch_notes: '',
         patch_image: '',
-        user_id: 2
-        // TODO: user_id should grab the id of the current user
+        user_id: userID
     })
 
     const handleChange = (event) => {
@@ -62,9 +61,9 @@ function PatchEdit() {
                 />
             </form>
 
-            <button onClick={
+            {/* <button onClick={
                 () => console.log(userID)
-            }>console log userID</button>
+            }>console log userID</button> */}
         </div>
     )
 }

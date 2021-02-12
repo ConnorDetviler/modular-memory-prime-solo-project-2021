@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import './PatchView.css';
 
 import {
@@ -30,10 +31,15 @@ function PatchView() {
     const patchDetails = useSelector((store) => store.details)
     const patchNames = useSelector((store) => store.names)
 
+    let patchLoad = useParams();
+    const history = useHistory();
+
     useEffect(() => {
+        console.log('params:', patchLoad);
+        let patchLoadID = Number(patchLoad.patch)
         dispatch({
             type: 'FETCH_DETAILS',
-            payload: 1
+            payload: patchLoadID
         });
 
         dispatch({
@@ -43,10 +49,12 @@ function PatchView() {
     }, []);
 
     const patchClick = (id) => {
-        dispatch({
-            type: 'FETCH_DETAILS',
-            payload: id
-        });
+        // switched to history.push, keeping the original commented out for now
+        // dispatch({
+        //     type: 'FETCH_DETAILS',
+        //     payload: id
+        // })
+        history.push(`/patch-view/${id}`)
     }
 
     return (

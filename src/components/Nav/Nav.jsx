@@ -23,7 +23,7 @@ function Nav() {
         <h2 className="nav-title">Prime Solo Project</h2>
       </Link>
       <div>
-        <Link className="navLink" to="/patch-view">
+        <Link className="navLink" to="/patch-view/0">
           Patch View
         </Link>
 

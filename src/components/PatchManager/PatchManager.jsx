@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,6 +17,7 @@ import {
 function PatchManager() {
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const userID = useSelector((store) => store.user.id)
     const allPatches = useSelector((store) => store.allPatches)
@@ -29,6 +31,11 @@ function PatchManager() {
     }, []);
 
 
+    const clickPatch = (id) => {
+        console.log(id)
+        history.push(`/patch-view/${id}`)
+    }
+
 
     return (
         <div>
@@ -41,13 +48,16 @@ function PatchManager() {
                             <TableCell>Tags</TableCell>
                             <TableCell>Date Created</TableCell>
                             <TableCell>Last Edited</TableCell>
+                            {/* table cells empty for styling */}
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {allPatches.map((row) => {
                             return (
                                 <TableRow key={row.id}>
-                                    <TableCell>{row.title}</TableCell>
+                                    <TableCell onClick={()=>clickPatch(row.id)} >{row.title}</TableCell>
                                     <TableCell>n/a</TableCell>
                                     <TableCell>{row.date_created}</TableCell>
                                     <TableCell>n/a</TableCell>

@@ -111,7 +111,7 @@ function App() {
             // Will show list of patches on the left
             // Will display a patch with details front and center
             exact
-            path="/patch-view"
+            path="/patch-view/:patch"
           >
             <PatchView />
           </ProtectedRoute>
