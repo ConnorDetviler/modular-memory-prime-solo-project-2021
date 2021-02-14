@@ -1,7 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-function* editPatch(action) {
+function* createPatch(action) {
     const patch = action.payload;
     // console.log(patch)
     try {
@@ -11,8 +11,19 @@ function* editPatch(action) {
     }
 }
 
+function* editPatch(action) {
+    const patch = action.payload;
+    console.log(patch)
+    // try {
+    //     yield axios.put('/api/patch', patch);
+    // } catch (err) {
+    //     console.log('error in editPatch', err)
+    // }
+}
+
 function* editSaga() {
-    yield takeEvery('EDIT_PATCH', editPatch);
+    yield takeEvery('CREATE_PATCH', createPatch);
+    yield takeEvery('EDIT_PATCH', editPatch)
 }
 
 export default editSaga

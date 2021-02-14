@@ -11,6 +11,7 @@ function PatchEdit() {
     const userID = useSelector((store) => store.user.id)
     const patchDetails = useSelector((store) => store.details)
     let patchLoad = useParams();
+    let patchLoadID = Number(patchLoad.patch)
 
     let [patch, setPatch] = useState({
         title: '',
@@ -21,10 +22,14 @@ function PatchEdit() {
 
     useEffect(() => {
         console.log('params:', patchLoad)
-        let patchLoadID = Number(patchLoad.patch)
         if (patchLoadID === 0) {
             console.log('creating new patch')
-            return
+            setPatch({...patch,
+                title: '',
+                patch_notes: '',
+                patch_image: '',
+                user_id: userID
+            })
         } else {
             console.log('editing patch with ID:', patchLoadID)
             dispatch({
@@ -58,7 +63,12 @@ function PatchEdit() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch({ type: "EDIT_PATCH", payload: patch })
+
+        if(patchLoadID === 0) {
+            dispatch({ type: "CREATE_PATCH", payload: patch })
+        } else {
+            dispatch({ type: "EDIT_PATCH", payload: {...patch, patch_id: patchLoadID}})
+        }
         setPatch({
             title: '',
             patch_notes: '',
@@ -70,6 +80,7 @@ function PatchEdit() {
 
     return (
         <div>
+            <img src={patch.patch_image} />
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -96,9 +107,9 @@ function PatchEdit() {
                 />
             </form>
 
-            <button onClick={
+            {/* <button onClick={
                 () => console.log(patchDetails)
-            }>console log</button>
+            }>console log</button> */}
         </div>
     )
 }
