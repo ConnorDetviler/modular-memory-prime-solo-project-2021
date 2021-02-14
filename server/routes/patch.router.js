@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
     const patch = req.body;
-    console.log('patch.router:', patch);
+    console.log('patch.router POST', patch);
 
     const query = `
         INSERT INTO "patch" ("title", "patch_notes", "patch_image", "user_id", "date_created")
@@ -30,5 +30,29 @@ router.post('/', (req, res) => {
         res.sendStatus(500)
     })
 });
+
+/**
+ * PUT route for editing patch
+ */
+router.put('/', (req, res) => {
+    const patch = req.body;
+    console.log('patch.router PUT', patch)
+
+    const query = `
+    UPDATE "patch"
+    SET "title" = $1,
+	    "patch_notes" = $2,
+	    "patch_image" = $3
+    WHERE "patch".id = $4;
+    `;
+
+    pool.query(query, [patch.title, patch.patch_notes, patch.patch_image, patch.patch_id])
+    .then(result => {
+        console.log(result)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+})
 
 module.exports = router;

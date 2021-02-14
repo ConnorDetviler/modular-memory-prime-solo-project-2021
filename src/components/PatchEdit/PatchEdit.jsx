@@ -66,8 +66,11 @@ function PatchEdit() {
 
         if(patchLoadID === 0) {
             dispatch({ type: "CREATE_PATCH", payload: patch })
+            // TODO: replace patchLoadID with correct new id
+            history.push(`/patch-view/${patchLoadID}`)
         } else {
             dispatch({ type: "EDIT_PATCH", payload: {...patch, patch_id: patchLoadID}})
+            history.push(`/patch-view/${patchLoadID}`)
         }
         setPatch({
             title: '',
@@ -75,8 +78,13 @@ function PatchEdit() {
             patch_image: '',
             user_id: userID
         })
-        history.push('/patch-view')
     }
+
+
+
+
+
+
 
     return (
         <div>
