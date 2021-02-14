@@ -119,7 +119,7 @@ function App() {
           <ProtectedRoute
 
             exact
-            path="/patch-edit"
+            path="/patch-edit/:patch"
           >
             <PatchEdit />
           </ProtectedRoute>

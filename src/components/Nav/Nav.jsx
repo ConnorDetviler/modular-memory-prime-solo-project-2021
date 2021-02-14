@@ -27,7 +27,7 @@ function Nav() {
           Patch View
         </Link>
 
-        <Link className="navLink" to="/patch-edit">
+        <Link className="navLink" to="/patch-edit/0">
           Patch Edit
         </Link>
 

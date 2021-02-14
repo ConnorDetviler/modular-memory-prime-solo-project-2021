@@ -36,6 +36,10 @@ function PatchManager() {
         history.push(`/patch-view/${id}`)
     }
 
+    const editPatch = (id) => {
+        console.log(id)
+        history.push(`/patch-edit/${id}`)
+    }
 
     return (
         <div>
@@ -61,7 +65,7 @@ function PatchManager() {
                                     <TableCell>n/a</TableCell>
                                     <TableCell>{row.date_created}</TableCell>
                                     <TableCell>n/a</TableCell>
-                                    <TableCell>EDIT</TableCell>
+                                    <TableCell onClick={()=>editPatch(row.id)} >EDIT</TableCell>
                                     <TableCell>DELETE</TableCell>
                                 </TableRow>
                             )
