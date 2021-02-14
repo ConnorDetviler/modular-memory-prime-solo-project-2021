@@ -35,12 +35,20 @@ function PatchEdit() {
     }, [])
 
     useEffect(() => {
-        setPatch({...patch,
-            title: patchDetails.title,
-            patch_notes: patchDetails.patch_notes,
-            patch_image: patchDetails.patch_image,
-            user_id: userID
-        })
+        // setInputs isn't run until data is recieved from reducer
+        function setInputs() {
+            setPatch({...patch,
+                title: patchDetails.title,
+                patch_notes: patchDetails.patch_notes,
+                patch_image: patchDetails.patch_image,
+                user_id: userID
+            })
+        }
+        // checking if data has been recieved from reducer
+        if (patchDetails.title !== undefined) {
+            setInputs()
+        }
+
     }, [patchDetails])
 
     const handleChange = (event) => {
