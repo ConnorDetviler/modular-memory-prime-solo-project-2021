@@ -41,6 +41,14 @@ function PatchManager() {
         history.push(`/patch-edit/${id}`)
     }
 
+    const deletePatch = (id) => {
+        console.log(id)
+        dispatch({
+            type: 'DELETE_PATCH',
+            payload: {id, userID}
+        })
+    }
+
     return (
         <div>
             {/* <button onClick = {() => console.log(allPatches)} >test</button> */}
@@ -66,7 +74,7 @@ function PatchManager() {
                                     <TableCell>{row.date_created}</TableCell>
                                     <TableCell>n/a</TableCell>
                                     <TableCell onClick={()=>editPatch(row.id)} >EDIT</TableCell>
-                                    <TableCell>DELETE</TableCell>
+                                    <TableCell onClick={()=>deletePatch(row.id)}>DELETE</TableCell>
                                 </TableRow>
                             )
                         })}

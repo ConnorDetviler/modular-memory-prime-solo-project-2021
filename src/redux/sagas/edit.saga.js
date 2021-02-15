@@ -21,9 +21,25 @@ function* editPatch(action) {
     }
 }
 
+function* deletePatch(action) {
+    const patch = action.payload
+    console.log(patch)
+    try {
+        yield axios.delete('/api/patch', { data:
+            {
+                id: patch.id,
+                userID: patch.userID
+            }
+        });
+    } catch (err) {
+        console.log('error in editPatch DELETE', err)
+    }
+}
+
 function* editSaga() {
     yield takeEvery('CREATE_PATCH', createPatch);
-    yield takeEvery('EDIT_PATCH', editPatch)
+    yield takeEvery('EDIT_PATCH', editPatch);
+    yield takeEvery('DELETE_PATCH', deletePatch);
 }
 
 export default editSaga

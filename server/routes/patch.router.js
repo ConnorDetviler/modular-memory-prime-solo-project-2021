@@ -55,4 +55,25 @@ router.put('/', (req, res) => {
     })
 })
 
+/**
+ * DELETE route for deleting patch
+ */
+router.delete('/', (req, res) => {
+    const patch = req.body;
+    console.log('patch.router DELETE', patch)
+
+    const query = `
+        DELETE FROM "patch"
+        WHERE "id" = $1 AND "user_id" = $2;
+    `;
+
+    pool.query(query, [patch.id, patch.userID])
+    .then(result => {
+        console.log(result)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+})
+
 module.exports = router;
