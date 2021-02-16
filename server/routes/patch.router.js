@@ -13,8 +13,9 @@ router.get('/', (req, res) => {
 /**
  * POST route for creating patch
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     const patch = req.body;
+    id = req.user.id;
     console.log('patch.router POST', patch);
 
     const query = `
@@ -22,7 +23,7 @@ router.post('/', (req, res) => {
         VALUES ($1, $2, $3, $4, NOW());
     `;
 
-    pool.query(query, [patch.title, patch.patch_notes, patch.patch_image, patch.user_id])
+    pool.query(query, [patch.title, patch.patch_notes, patch.patch_image, id])
     .then(result => {
         console.log(result)
     })
@@ -35,40 +36,42 @@ router.post('/', (req, res) => {
 /**
  * PUT route for editing patch
  */
-router.put('/', (req, res) => {
+router.put('/', rejectUnauthenticated, (req, res) => {
     const patch = req.body;
     console.log('patch.router PUT', patch)
+    let id = req.user.id;
 
     const query = `
     UPDATE "patch"
     SET "title" = $1,
 	    "patch_notes" = $2,
 	    "patch_image" = $3
-    WHERE "patch".id = $4;
+    WHERE "patch".id = $4 AND "patch".user_id = $5;
     `;
 
-    pool.query(query, [patch.title, patch.patch_notes, patch.patch_image, patch.patch_id])
+    pool.query(query, [patch.title, patch.patch_notes, patch.patch_image, patch.patch_id, id])
     .then(result => {
         console.log(result)
     })
     .catch(err => {
         console.log(err)
     })
-})
+});
 
 /**
  * DELETE route for deleting patch
  */
-router.delete('/', (req, res) => {
+router.delete('/', rejectUnauthenticated, (req, res) => {
     const patch = req.body;
     console.log('patch.router DELETE', patch)
+    id = req.user.id;
 
     const query = `
         DELETE FROM "patch"
         WHERE "id" = $1 AND "user_id" = $2;
     `;
 
-    pool.query(query, [patch.id, patch.userID])
+    pool.query(query, [patch.id, id])
     .then(result => {
         console.log(result)
     })

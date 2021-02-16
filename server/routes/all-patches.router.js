@@ -1,13 +1,14 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
  * GET route for all data of all of current user's patches
  */
-router.get('/:id', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
 
-    let id = Number(req.params.id);
+    let id = req.user.id;
     console.log('in all-patches.router - user id:', id)
 
     const queryText = `

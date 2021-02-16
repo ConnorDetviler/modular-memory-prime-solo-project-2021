@@ -1,10 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
 
-    let id = Number(req.params.id);
+    // let id = Number(req.params.id);
+    let id = req.user.id;
     console.log('user id:', id)
 
     const queryText = `

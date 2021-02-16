@@ -2,10 +2,9 @@ import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* fetchAllPatches(action) {
-    let id = action.payload
-    console.log('fetching all patches for user:', id)
+
     try {
-        const patchesGet = yield axios.get(`/api/all-patches/${id}`)
+        const patchesGet = yield axios.get(`/api/all-patches`)
         const patches = patchesGet.data;
 
         console.log('all patches from router:', patches)

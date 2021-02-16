@@ -26,7 +26,6 @@ function PatchManager() {
     useEffect(() => {
         dispatch({
             type: 'FETCH_ALL_PATCHES',
-            payload: userID
         });
     }, []);
 
