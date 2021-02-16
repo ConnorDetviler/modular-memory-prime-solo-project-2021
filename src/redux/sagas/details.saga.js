@@ -19,8 +19,16 @@ function* fetchDetails(action) {
     }
 }
 
+function* clearDetails() {
+    console.log('clearing details reducer')
+    yield put({
+        type: 'ERASE_DETAILS'
+    })
+}
+
 function* detailSaga() {
     yield takeEvery('FETCH_DETAILS', fetchDetails);
+    yield takeEvery('CLEAR_DETAILS', clearDetails);
 }
 
 export default detailSaga

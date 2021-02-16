@@ -30,6 +30,10 @@ function PatchEdit() {
                 patch_image: '',
                 user_id: userID
             })
+            // clears reducer of all patch details
+            dispatch({
+                type: 'CLEAR_DETAILS'
+            })
         } else {
             console.log('editing patch with ID:', patchLoadID)
             dispatch({
@@ -42,12 +46,22 @@ function PatchEdit() {
     useEffect(() => {
         // setInputs isn't run until data is recieved from reducer
         function setInputs() {
-            setPatch({...patch,
-                title: patchDetails.title,
-                patch_notes: patchDetails.patch_notes,
-                patch_image: patchDetails.patch_image,
-                user_id: userID
-            })
+            if (patchLoadID !== 0) {
+                setPatch({...patch,
+                    title: patchDetails.title,
+                    patch_notes: patchDetails.patch_notes,
+                    patch_image: patchDetails.patch_image,
+                    user_id: userID
+                })
+            } else {
+                // makes sure all inputs are cleared when patch-edit view is empty (creation of new patch)
+                setPatch({
+                    title: '',
+                    patch_notes: '',
+                    patch_image: '',
+                    user_id: userID
+                })
+            }
         }
         // checking if data has been recieved from reducer
         if (patchDetails.title !== undefined) {
