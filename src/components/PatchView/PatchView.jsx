@@ -32,11 +32,11 @@ function PatchView() {
     const patchNames = useSelector((store) => store.names)
 
     let patchLoad = useParams();
+    let patchLoadID = Number(patchLoad.patch)
     const history = useHistory();
 
     useEffect(() => {
         console.log('params:', patchLoad);
-        let patchLoadID = Number(patchLoad.patch)
         dispatch({
             type: 'FETCH_DETAILS',
             payload: patchLoadID
@@ -74,9 +74,15 @@ function PatchView() {
                         })}
                     </List>
                 </div>
-                <h1>{patchDetails.title}</h1>
-                <img src={patchDetails.patch_image} />
-                <p>{patchDetails.patch_notes}</p>
+                {patchLoadID !== 0
+                ?   <>
+                    <h1>{patchDetails.title}</h1>
+                    <img src={patchDetails.patch_image} />
+                    <p>{patchDetails.patch_notes}</p>
+                    </>
+                : <p>Welcome :)</p>
+                }
+
             </Container>
         </div>
     )
