@@ -9,6 +9,7 @@ import {
     List,
     ListItem,
     ListItemText,
+    Chip,
     makeStyles
         } from '@material-ui/core';
 
@@ -20,6 +21,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const tagStyle = {
+    backgroundColor: 'white',
+    border: '1px solid'
+};
+
 function PatchView() {
 
     const classes = useStyles();
@@ -27,6 +33,7 @@ function PatchView() {
     // const id = 1 // placeholder - this is the patch's id
     const dispatch = useDispatch();
 
+    // TODO: get rid of userID
     const userID = useSelector((store) => store.user.id)
     const patchDetails = useSelector((store) => store.details)
     const patchNames = useSelector((store) => store.names)
@@ -44,6 +51,7 @@ function PatchView() {
 
         dispatch({
             type: 'FETCH_PATCH_NAMES',
+            // TODO: get rid of userID
             payload: userID
         });
     }, []);
@@ -79,6 +87,12 @@ function PatchView() {
                     <h1>{patchDetails.title}</h1>
                     <img src={patchDetails.patch_image} />
                     <p>{patchDetails.patch_notes}</p>
+                    <div>
+                        <Chip
+                            label="tag"
+                            style={tagStyle}
+                        />
+                    </div>
                     </>
                 : <p>Welcome :)</p>
                 }

@@ -45,7 +45,10 @@ function PatchManager() {
         dispatch({
             type: 'DELETE_PATCH',
             payload: {id, userID}
-        })
+        });
+        dispatch({
+            type: 'FETCH_ALL_PATCHES'
+        });
     }
 
     return (
