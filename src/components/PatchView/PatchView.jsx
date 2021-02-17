@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import './PatchView.css';
 
+import TagChip from '../TagChip/TagChip'
+
 import {
     Box,
     Container,
@@ -90,11 +92,15 @@ function PatchView() {
                     <div>
                     {patchDetails?.tags?.map(tag => {
                         return (
-                            <Chip
-                                label={tag.name}
-                                // style={tagStyle.backgroundColor = `#937287`}
-                                style={{backgroundColor: `#${tag.color}`}}
-                                // color="primary"
+                            // <Chip
+                            //     label={tag.name}
+                            //     // style={tagStyle.backgroundColor = `#937287`}
+                            //     style={{backgroundColor: `#${tag.color}`}}
+                            //     // color="primary"
+                            // />
+                            <TagChip
+                                tag={tag}
+                                selectable={false}
                             />
                         )
                     })}
