@@ -102,7 +102,6 @@ function PatchEdit() {
 
     return (
         <div>
-            <img src={patch.patch_image} />
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -128,6 +127,10 @@ function PatchEdit() {
                     type="submit"
                 />
             </form>
+
+            
+
+            <img src={patch.patch_image} />
 
             {/* <button onClick={
                 () => console.log(patchDetails)

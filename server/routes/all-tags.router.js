@@ -4,26 +4,23 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
- * GET route for all data of all of current user's patches
+ * GET route for all tags
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
-
-    let id = req.user.id;
-    console.log('in all-patches.router - user id:', id)
+    const user = req.user.id;
 
     const queryText = `
-        SELECT * FROM "patch"
-        WHERE "patch".user_id = $1;
+        SELECT * FROM "tag"
+        WHERE "tag".user_id = $1;
     `;
 
     pool
-    .query(queryText, [id])
-    .then((result) => {
+    .query(queryText, [user])
+    .then(result => {
         res.send(result.rows)
-        // console.log(result.rows)
     })
-    .catch((err) => {
-        console.error("Error completing SELECT all patches query", err);
+    .catch(err => {
+        console.log('error completing SELECT all tags:', err)
         res.sendStatus(500)
     })
 });
