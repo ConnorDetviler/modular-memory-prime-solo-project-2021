@@ -6,7 +6,7 @@ function* fetchDetails(action) {
     console.log(id)
     try {
         const detailsGet = yield axios.get(`/api/details/${id}`)
-        const patchDetails = detailsGet.data[0];
+        const patchDetails = detailsGet.data;
 
         console.log('patch details from router:', patchDetails)
 
