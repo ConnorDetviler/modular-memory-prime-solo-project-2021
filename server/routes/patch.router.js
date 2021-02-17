@@ -20,12 +20,15 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
     const query = `
         INSERT INTO "patch" ("title", "patch_notes", "patch_image", "user_id", "date_created")
-        VALUES ($1, $2, $3, $4, NOW());
+        VALUES ($1, $2, $3, $4, NOW())
+        RETURNING "patch".id;
     `;
 
     pool.query(query, [patch.title, patch.patch_notes, patch.patch_image, id])
     .then(result => {
         console.log(result)
+        console.log('returning new id:', result.rows[0].id)
+        res.send({newPatchID: result.rows[0].id});
     })
     .catch(err => {
         console.log(err);

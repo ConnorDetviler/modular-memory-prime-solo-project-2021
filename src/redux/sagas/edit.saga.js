@@ -5,7 +5,8 @@ function* createPatch(action) {
     const patch = action.payload;
     // console.log(patch)
     try {
-        yield axios.post('/api/patch', patch);
+        const newID = yield axios.post('/api/patch', patch);
+        console.log('id of new patch:', newID)
     } catch (err) {
         console.log('error in editPatch POST', err)
     }
