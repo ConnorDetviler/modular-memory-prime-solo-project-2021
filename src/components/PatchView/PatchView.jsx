@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const tagStyle = {
-    backgroundColor: 'white',
+    backgroundColor: '#888392',
     border: '1px solid'
 };
 
@@ -88,10 +88,17 @@ function PatchView() {
                     <img src={patchDetails.patch_image} />
                     <p>{patchDetails.patch_notes}</p>
                     <div>
-                        <Chip
-                            label="tag"
-                            style={tagStyle}
-                        />
+                    {patchDetails?.tags?.map(tag => {
+                        return (
+                            <Chip
+                                label={tag.name}
+                                // style={tagStyle.backgroundColor = `#937287`}
+                                style={{backgroundColor: `#${tag.color}`}}
+                                // color="primary"
+                            />
+                        )
+                    })}
+                    {/* <button onClick={() => console.log(patchDetails)}>test</button> */}
                     </div>
                     </>
                 : <p>Welcome :)</p>
