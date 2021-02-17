@@ -4,6 +4,7 @@ import user from './user.reducer';
 import details from './details.reducer';
 import names from './patch-names.reducer';
 import allPatches from './all-patches.reducer';
+import allTags from './all-tags.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   details,
   names,
-  allPatches
+  allPatches,
+  allTags
 });
 
 export default rootReducer;

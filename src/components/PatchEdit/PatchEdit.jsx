@@ -10,6 +10,8 @@ function PatchEdit() {
 
     const userID = useSelector((store) => store.user.id)
     const patchDetails = useSelector((store) => store.details)
+    const allTags = useSelector((store) => store.tags)
+
     let patchLoad = useParams();
     let patchLoadID = Number(patchLoad.patch)
 
@@ -20,6 +22,7 @@ function PatchEdit() {
         user_id: userID
     })
 
+    // on page load
     useEffect(() => {
         console.log('params:', patchLoad)
         if (patchLoadID === 0) {
@@ -41,8 +44,13 @@ function PatchEdit() {
                 payload: patchLoadID
             })
         }
+
+        dispatch({
+            type: 'FETCH_ALL_TAGS'
+        })
     }, [])
 
+    // when patchDetails changes
     useEffect(() => {
         // setInputs isn't run until data is recieved from reducer
         function setInputs() {
