@@ -20,7 +20,8 @@ function PatchEdit() {
         title: '',
         patch_notes: '',
         patch_image: '',
-        user_id: userID
+        user_id: userID,
+        tags: []
     })
 
     let [tags, setTags] = useState([])
@@ -35,7 +36,8 @@ function PatchEdit() {
                 title: '',
                 patch_notes: '',
                 patch_image: '',
-                user_id: userID
+                user_id: userID,
+                tags: []
             })
             // clears reducer of all patch details
             dispatch({
@@ -64,7 +66,8 @@ function PatchEdit() {
                     title: patchDetails.title,
                     patch_notes: patchDetails.patch_notes,
                     patch_image: patchDetails.patch_image,
-                    user_id: userID
+                    user_id: userID,
+                    tags: patchDetails.tags
                 })
             } else {
                 // makes sure all inputs are cleared when patch-edit view is empty (creation of new patch)
@@ -72,7 +75,8 @@ function PatchEdit() {
                     title: '',
                     patch_notes: '',
                     patch_image: '',
-                    user_id: userID
+                    user_id: userID,
+                    tags: []
                 })
             }
         }
@@ -84,7 +88,7 @@ function PatchEdit() {
     }, [patchDetails])
 
 
-    // when allTags changes
+    // when allTags and patchDetails changes
     useEffect(() => {
         // setTagList doesn't run until data is recieved from both reducers
         function setTagList() {
@@ -117,10 +121,14 @@ function PatchEdit() {
             setTags([...allTagsSelected])
         }
 
-        if (allTags[0] !== undefined && patchDetails.title !== undefined) {
+        // if creating a new patch, patchDetails will be undefined
+        // The second condition will run if editing an existing patch
+        if (allTags[0] !== undefined && patchDetails.title === undefined){
+            setTags(allTags);
+        } else if (allTags[0] !== undefined && patchDetails.title !== undefined) {
             setTagList()
         }
-    }, [allTags])
+    }, [allTags, patchDetails])
 
 
     const handleChange = (event) => {
@@ -144,14 +152,13 @@ function PatchEdit() {
             title: '',
             patch_notes: '',
             patch_image: '',
-            user_id: userID
+            user_id: userID,
+            tags: []
         })
     }
 
 
-    const tagClick = (event) => {
-        // gets id of selected tag
-        const tagID = Number(event.target.closest("div").dataset.id)
+    const tagClick = (tagID) => {
 
         // following logic copies local state into 'shallow state' that can be worked with
         // 'selected' attribute is toggled in shallow state
@@ -162,9 +169,11 @@ function PatchEdit() {
 
         // local state is replaced with shallow state
         setTags(shallowTagList);
+        console.log(shallowTagList)
+
+        setPatch({...patch, tags: shallowTagList})
 
     }
-
 
 
 
@@ -204,7 +213,7 @@ function PatchEdit() {
                                     tag={tag}
                                     selectable={true}
                                     selected={tag.selected}
-                                    onClick={tagClick}
+                                    onClick={() => tagClick(tag.id)}
                                 />
                             )
                         })}
@@ -213,8 +222,12 @@ function PatchEdit() {
             <img src={patch.patch_image} />
 
             <button onClick={
+                () => console.log(patch)
+            }>console log patch</button>
+
+            <button onClick={
                 () => console.log(tags)
-            }>console log</button>
+            }>console log tags</button>
         </div>
     )
 }
