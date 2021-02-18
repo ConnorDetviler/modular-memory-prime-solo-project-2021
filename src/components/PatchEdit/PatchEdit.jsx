@@ -54,6 +54,7 @@ function PatchEdit() {
         })
     }, [])
 
+
     // when patchDetails changes
     useEffect(() => {
         // setInputs doesn't run until data is recieved from reducer
@@ -81,6 +82,7 @@ function PatchEdit() {
         }
 
     }, [patchDetails])
+
 
     // when allTags changes
     useEffect(() => {
@@ -120,10 +122,12 @@ function PatchEdit() {
         }
     }, [allTags])
 
+
     const handleChange = (event) => {
         const value = event.target.value;
         setPatch({...patch, [event.target.name]: value})
     }
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -143,6 +147,8 @@ function PatchEdit() {
             user_id: userID
         })
     }
+
+
 
 
 
@@ -176,16 +182,18 @@ function PatchEdit() {
                 />
             </form>
 
-            {tags?.map(tag => {
-                        return (
-                            <TagChip
-                                key={tag.id}
-                                tag={tag}
-                                selectable={true}
-                                selected={tag.selected}
-                            />
-                        )
-                    })}
+            <div>
+                {tags?.map(tag => {
+                            return (
+                                <TagChip
+                                    key={tag.id}
+                                    tag={tag}
+                                    selectable={true}
+                                    selected={tag.selected}
+                                />
+                            )
+                        })}
+            </div>
 
             <img src={patch.patch_image} />
 

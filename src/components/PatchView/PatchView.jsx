@@ -23,10 +23,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const tagStyle = {
-    backgroundColor: '#888392',
-    border: '1px solid'
-};
 
 function PatchView() {
 

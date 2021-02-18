@@ -1,11 +1,32 @@
 import Chip from '@material-ui/core/Chip';
 
-function TagChip({tag, selectable}) {
+
+function TagChip({tag, selectable, selected}) {
+
+
     return (
-        <Chip
-         label={tag.name}
-         style={{backgroundColor: `#${tag.color}`}}
-        />
+
+        <span>
+            {selected
+            ?
+            <Chip
+                label={tag.name}
+                color="primary"
+                // style={{
+                //     backgroundColor: `#${tag.color}`,
+                //     // border: 'solid 2px'
+                // }}
+            />
+            :
+            <Chip
+                label={tag.name}
+                variant="outlined"
+                // style={{
+                //     backgroundColor: `#${tag.color}`,
+                // }}
+            />
+            }
+        </span>
     )
 }
 
