@@ -92,6 +92,7 @@ function PatchView() {
                                 key={tag.id}
                                 tag={tag}
                                 selectable={false}
+                                selected={true}
                             />
                         )
                     })}

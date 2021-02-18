@@ -1,7 +1,7 @@
 import Chip from '@material-ui/core/Chip';
 
 
-function TagChip({tag, selectable, selected}) {
+function TagChip({tag, selectable, selected, onClick}) {
 
 
     return (
@@ -12,6 +12,12 @@ function TagChip({tag, selectable, selected}) {
             <Chip
                 label={tag.name}
                 color="primary"
+                onClick={onClick}
+                clickable={selectable}
+                value={tag.id}
+                data-id={tag.id}
+
+
                 // style={{
                 //     backgroundColor: `#${tag.color}`,
                 //     // border: 'solid 2px'
@@ -21,6 +27,12 @@ function TagChip({tag, selectable, selected}) {
             <Chip
                 label={tag.name}
                 variant="outlined"
+                onClick={onClick}
+                clickable={selectable}
+                value={tag.id}
+                data-id={tag.id}
+
+
                 // style={{
                 //     backgroundColor: `#${tag.color}`,
                 // }}

@@ -149,7 +149,21 @@ function PatchEdit() {
     }
 
 
+    const tagClick = (event) => {
+        // gets id of selected tag
+        const tagID = Number(event.target.closest("div").dataset.id)
 
+        // following logic copies local state into 'shallow state' that can be worked with
+        // 'selected' attribute is toggled in shallow state
+        let shallowTagList = [...tags];
+        let shallowTag = {...shallowTagList[tagID-1]};
+        shallowTag.selected = !shallowTag.selected
+        shallowTagList[tagID-1] = shallowTag;
+
+        // local state is replaced with shallow state
+        setTags(shallowTagList);
+
+    }
 
 
 
@@ -190,6 +204,7 @@ function PatchEdit() {
                                     tag={tag}
                                     selectable={true}
                                     selected={tag.selected}
+                                    onClick={tagClick}
                                 />
                             )
                         })}
