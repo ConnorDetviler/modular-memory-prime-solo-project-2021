@@ -93,6 +93,7 @@ function PatchView() {
                     {patchDetails?.tags?.map(tag => {
                         return (
                             <TagChip
+                                key={tag.id}
                                 tag={tag}
                                 selectable={false}
                             />

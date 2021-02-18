@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
+import TagChip from '../TagChip/TagChip';
 
 
 function PatchEdit() {
@@ -10,7 +11,7 @@ function PatchEdit() {
 
     const userID = useSelector((store) => store.user.id)
     const patchDetails = useSelector((store) => store.details)
-    const allTags = useSelector((store) => store.tags)
+    const allTags = useSelector((store) => store.allTags)
 
     let patchLoad = useParams();
     let patchLoadID = Number(patchLoad.patch)
@@ -21,6 +22,9 @@ function PatchEdit() {
         patch_image: '',
         user_id: userID
     })
+
+    let [tags, setTags] = useState([])
+
 
     // on page load
     useEffect(() => {
@@ -52,7 +56,7 @@ function PatchEdit() {
 
     // when patchDetails changes
     useEffect(() => {
-        // setInputs isn't run until data is recieved from reducer
+        // setInputs doesn't run until data is recieved from reducer
         function setInputs() {
             if (patchLoadID !== 0) {
                 setPatch({...patch,
@@ -78,6 +82,44 @@ function PatchEdit() {
 
     }, [patchDetails])
 
+    // when allTags changes
+    useEffect(() => {
+        // setTagList doesn't run until data is recieved from both reducers
+        function setTagList() {
+            // loop through allTagsSelected and add property, selected: {bool} to each object
+            // set it to true if tag ID exists within patchDetails.tags
+            const allTagsSelected = allTags;
+            const tagIdArray = [];
+
+            // creates array of tag IDs that are associated with selected patch
+            for (let i = 0; i < patchDetails.tags.length; i++) {
+                const tag = patchDetails.tags[i];
+                tagIdArray.push(tag.id)
+            }
+
+            // compare all tags with those that exist in patch to determine which are selected
+            for (let i = 0; i < allTagsSelected.length; i++) {
+                // default value is false
+                allTagsSelected[i].selected = false;
+
+                for (let j = 0; j < tagIdArray.length; j++) {
+                    // if the tag ID is found among those that are associated with the selected patch,
+                    // then the selected property is set to true
+                    if (allTagsSelected[i].id === tagIdArray[j]) {
+
+                        allTagsSelected[i].selected = true;
+                    }
+                }
+            }
+            // tags are stored in local state with newly added 'selected' property
+            setTags([...allTagsSelected])
+        }
+
+        if (allTags[0] !== undefined && patchDetails.title !== undefined) {
+            setTagList()
+        }
+    }, [allTags])
+
     const handleChange = (event) => {
         const value = event.target.value;
         setPatch({...patch, [event.target.name]: value})
@@ -101,8 +143,6 @@ function PatchEdit() {
             user_id: userID
         })
     }
-
-
 
 
 
@@ -136,13 +176,22 @@ function PatchEdit() {
                 />
             </form>
 
-            
+            {tags?.map(tag => {
+                        return (
+                            <TagChip
+                                key={tag.id}
+                                tag={tag}
+                                selectable={true}
+                                selected={tag.selected}
+                            />
+                        )
+                    })}
 
             <img src={patch.patch_image} />
 
-            {/* <button onClick={
-                () => console.log(patchDetails)
-            }>console log</button> */}
+            <button onClick={
+                () => console.log(tags)
+            }>console log</button>
         </div>
     )
 }
