@@ -19,21 +19,10 @@ function Nav() {
 
   return (
     <div className="nav">
-      <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
+      <Link to="/patch-view/0">
+        <h2 className="nav-title">Modular Memory</h2>
       </Link>
       <div>
-        <Link className="navLink" to="/patch-view/0">
-          Patch View
-        </Link>
-
-        <Link className="navLink" to="/patch-edit/0">
-          Patch Edit
-        </Link>
-
-        <Link className="navLink" to="/patch-manager">
-          Patch Manager
-        </Link>
 
         <Link className="navLink" to={loginLinkData.path}>
           {loginLinkData.text}
@@ -41,9 +30,20 @@ function Nav() {
 
         {user.id && (
           <>
-            <Link className="navLink" to="/info">
-              Info Page
+            <Link className="navLink" to="/patch-view/0">
+              Patch View
             </Link>
+
+            <Link className="navLink" to="/patch-edit/0">
+              Patch Edit
+            </Link>
+
+            <Link className="navLink" to="/patch-manager">
+              Patch Manager
+            </Link>
+            {/* <Link className="navLink" to="/info">
+              Info Page
+            </Link> */}
             <LogOutButton className="navLink" />
           </>
         )}

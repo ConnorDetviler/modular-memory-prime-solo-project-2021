@@ -7,6 +7,7 @@ import TagChip from '../TagChip/TagChip'
 
 import {
     Box,
+    Button,
     Container,
     List,
     ListItem,
@@ -82,22 +83,23 @@ function PatchView() {
                 </div>
                 {patchLoadID !== 0
                 ?   <>
-                    <h1>{patchDetails.title}</h1>
-                    <img src={patchDetails.patch_image} />
-                    <p>{patchDetails.patch_notes}</p>
-                    <div>
-                    {patchDetails?.tags?.map(tag => {
-                        return (
-                            <TagChip
-                                key={tag.id}
-                                tag={tag}
-                                selectable={false}
-                                selected={true}
-                            />
-                        )
-                    })}
-                    {/* <button onClick={() => console.log(patchDetails)}>test</button> */}
-                    </div>
+                        <h1>{patchDetails.title}</h1>
+                        <img src={patchDetails.patch_image} />
+                        <p>{patchDetails.patch_notes}</p>
+                        <div>
+                        {patchDetails?.tags?.map(tag => {
+                            return (
+                                <TagChip
+                                    key={tag.id}
+                                    tag={tag}
+                                    selectable={false}
+                                    selected={true}
+                                />
+                            )
+                        })}
+                        {/* <button onClick={() => console.log(patchDetails)}>test</button> */}
+                        </div>
+                        <Button onClick={() => history.push(`/patch-edit/${patchLoadID}`)}>Edit</Button>
                     </>
                 : <p>Welcome :)</p>
                 }
