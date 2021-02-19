@@ -18,8 +18,17 @@ function* fetchAllTags(action) {
     }
 }
 
+function* createTag(action) {
+    try {
+        yield axios.post(`/api/all-tags`, {name: action.payload})
+    } catch (err) {
+        console.log('Error in createTag', err)
+    }
+}
+
 function* fetchAllTagsSaga() {
     yield takeEvery('FETCH_ALL_TAGS', fetchAllTags);
+    yield takeEvery('CREATE_TAG', createTag);
 }
 
 export default fetchAllTagsSaga

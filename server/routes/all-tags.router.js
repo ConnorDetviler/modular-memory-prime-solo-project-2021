@@ -25,4 +25,25 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
+router.post('/', rejectUnauthenticated, (req, res) => {
+    const tag = req.body.name;
+    const user = req.user.id
+    console.log(tag.name)
+
+    const queryText = `
+        INSERT INTO "tag" ("name", "user_id")
+        VALUES ($1, $2);
+    `;
+
+    pool
+    .query(queryText, [tag, user])
+    .then(result => {
+        console.log(result)
+    })
+    .catch(err => {
+        console.log('error creating new tag in all-tags.router.js', err)
+    })
+
+})
+
 module.exports = router;

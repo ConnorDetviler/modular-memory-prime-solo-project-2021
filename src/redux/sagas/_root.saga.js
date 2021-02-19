@@ -25,5 +25,6 @@ export default function* rootSaga() {
     editSaga(),
     fetchAllPatchesSaga(),
     fetchAllTagsSaga(),
+
   ]);
 }

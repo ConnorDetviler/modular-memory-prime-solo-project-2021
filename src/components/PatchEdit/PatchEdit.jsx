@@ -26,6 +26,8 @@ function PatchEdit() {
 
     let [tags, setTags] = useState([])
 
+    let [newTag, setNewTag] = useState('')
+
 
     // on page load
     useEffect(() => {
@@ -135,6 +137,11 @@ function PatchEdit() {
         const value = event.target.value;
         setPatch({...patch, [event.target.name]: value})
     }
+    
+    const handleChangeTag = (event) => {
+        const value = event.target.value;
+        setNewTag(value)
+    }
 
 
     const handleSubmit = (event) => {
@@ -157,6 +164,21 @@ function PatchEdit() {
         })
     }
 
+    const createTag = (event) => {
+        event.preventDefault();
+
+        dispatch({
+            type: "CREATE_TAG",
+            payload: newTag
+        })
+
+        setNewTag('')
+
+        dispatch({
+            type: 'FETCH_ALL_TAGS'
+        })
+    }
+
 
     const tagClick = (tagID) => {
 
@@ -169,7 +191,7 @@ function PatchEdit() {
 
         // local state is replaced with shallow state
         setTags(shallowTagList);
-        console.log(shallowTagList)
+        // console.log(shallowTagList)
 
         setPatch({...patch, tags: shallowTagList})
 
@@ -202,6 +224,24 @@ function PatchEdit() {
                 />
                 <input
                     type="submit"
+                    value="Save"
+                />
+            </form>
+
+            <br/>
+
+            <form onSubmit={createTag}>
+                <input
+                    type="text"
+                    placeholder="new tag"
+                    name="name"
+                    value={newTag}
+                    onChange={handleChangeTag}
+                />
+
+                <input
+                    type="submit"
+                    value="Create Tag"
                 />
             </form>
 
@@ -221,13 +261,13 @@ function PatchEdit() {
 
             <img src={patch.patch_image} />
 
-            <button onClick={
+            {/* <button onClick={
                 () => console.log(patch)
             }>console log patch</button>
 
             <button onClick={
                 () => console.log(tags)
-            }>console log tags</button>
+            }>console log tags</button> */}
         </div>
     )
 }
