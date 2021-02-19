@@ -123,7 +123,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
                 let queryValues = '';
                 // poolArray references the $x values within the queryValues
                 let poolArray = [patch.patch_id];
-    
+
                 for (let i = 0; i < tagArray.length; i++) {
                     queryValues = queryValues.concat(`, ($1, $${i+2})`)
                     poolArray.push(tagArray[i])
@@ -131,14 +131,14 @@ router.put('/', rejectUnauthenticated, (req, res) => {
                 queryValues = queryValues.substring(2)
                 // console.log('queryValues', queryValues);
                 // console.log('poolArray', poolArray);
-    
+
                 const tagQuery = `
                     INSERT INTO "patch_tag" ("patch_id", "tag_id")
                     VALUES ${queryValues};
                 `;
-    
+
                 // console.log('tagQuery', tagQuery);
-    
+
                 pool.query(tagQuery, poolArray)
                 .then(result => {
                     console.log(result)
@@ -167,15 +167,28 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
     const patch = req.body;
     console.log('patch.router DELETE', patch)
     id = req.user.id;
-
-    const query = `
-        DELETE FROM "patch"
-        WHERE "id" = $1 AND "user_id" = $2;
-    `;
-
-    pool.query(query, [patch.id, id])
+    // first query deletes tag associations with patch
+    const deleteQuery = `
+        DELETE FROM "patch_tag"
+        WHERE "patch_id" = $1;
+    `
+    pool.query(deleteQuery, [patch.id])
     .then(result => {
         console.log(result)
+
+        // second query deletes patch itself
+        const query = `
+            DELETE FROM "patch"
+            WHERE "id" = $1 AND "user_id" = $2;
+        `;
+
+        pool.query(query, [patch.id, id])
+        .then(result => {
+            console.log(result)
+        })
+        .catch(err => {
+            console.log(err)
+        })
     })
     .catch(err => {
         console.log(err)
