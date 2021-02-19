@@ -97,6 +97,63 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     pool.query(query, [patch.title, patch.patch_notes, patch.patch_image, patch.patch_id, id])
     .then(result => {
         console.log(result)
+
+        // second query for clearing out existing tag associations for selected patch
+        const deleteQuery = `
+            DELETE FROM "patch_tag"
+            WHERE "patch_id" = $1;
+        `
+        pool.query(deleteQuery, [patch.patch_id])
+        .then(result => {
+            console.log(result)
+
+
+            // third query for entering patch_tag associations
+            // tagArray is given only the ID numbers of each selected tag
+            let tagArray = [];
+            for (let i = 0; i < patch.tags.length; i++) {
+                const tagObject = patch.tags[i];
+                if (tagObject.selected) {
+                    tagArray.push(tagObject.id)
+                }
+            }
+            // conditional checks if there are any tag associations to be made
+            if (tagArray[0] !== undefined) {
+                // queryValues generates the VALUES portion of the query
+                let queryValues = '';
+                // poolArray references the $x values within the queryValues
+                let poolArray = [patch.patch_id];
+    
+                for (let i = 0; i < tagArray.length; i++) {
+                    queryValues = queryValues.concat(`, ($1, $${i+2})`)
+                    poolArray.push(tagArray[i])
+                }
+                queryValues = queryValues.substring(2)
+                // console.log('queryValues', queryValues);
+                // console.log('poolArray', poolArray);
+    
+                const tagQuery = `
+                    INSERT INTO "patch_tag" ("patch_id", "tag_id")
+                    VALUES ${queryValues};
+                `;
+    
+                // console.log('tagQuery', tagQuery);
+    
+                pool.query(tagQuery, poolArray)
+                .then(result => {
+                    console.log(result)
+                })
+                .catch(err => {
+                    console.log(err)
+                    res.sendStatus(500)
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+
     })
     .catch(err => {
         console.log(err)

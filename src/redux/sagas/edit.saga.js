@@ -4,7 +4,7 @@ import axios from 'axios';
 function* createPatch(action) {
     const patch = action.payload;
     console.log(patch)
-    
+
     try {
         const newID = yield axios.post('/api/patch', patch);
         console.log('id of new patch:', newID)
