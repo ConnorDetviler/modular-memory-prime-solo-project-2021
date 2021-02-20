@@ -19,8 +19,36 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     pool
     .query(queryText, [id])
     .then((result) => {
-        res.send(result.rows)
-        // console.log(result.rows)
+        const patchesArr = result.rows;
+
+        // second query for getting all associated tags for each patch
+        const tagQueryText = `
+            SELECT "tag".id, "tag".name FROM "patch_tag"
+            JOIN "tag" ON "patch_tag".tag_id = "tag".id
+            WHERE "patch_id" = $1;
+        `;
+
+        function sendData() {
+            res.send(patchesArr)
+        }
+
+        // does a query for each patch in the result.rows from last query to get it's tags
+        for (let i = 0; i < patchesArr.length; i++) {
+            // console.log(patchesArr[i].id)
+            pool
+            .query(tagQueryText, [patchesArr[i].id])
+            .then((result) => {
+                patchesArr[i].tags = result.rows
+
+                // when loop is finished:
+                if (i === patchesArr.length - 1) {
+                    sendData()
+                }
+            })
+            .catch((err) => {
+                console.log(`Error completing SELECT in tag query within all-patches`, err)
+            })
+        }
     })
     .catch((err) => {
         console.error("Error completing SELECT all patches query", err);

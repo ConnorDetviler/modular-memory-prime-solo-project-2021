@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
+import TagChip from '../TagChip/TagChip';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Table,
@@ -51,6 +51,8 @@ function PatchManager() {
         });
     }
 
+
+
     return (
         <div>
             {/* <button onClick = {() => console.log(allPatches)} >test</button> */}
@@ -61,7 +63,7 @@ function PatchManager() {
                             <TableCell>Name</TableCell>
                             <TableCell>Tags</TableCell>
                             <TableCell>Date Created</TableCell>
-                            <TableCell>Last Edited</TableCell>
+                            {/* <TableCell>Last Edited</TableCell> */}
                             {/* table cells empty for styling */}
                             <TableCell></TableCell>
                             <TableCell></TableCell>
@@ -72,9 +74,11 @@ function PatchManager() {
                             return (
                                 <TableRow key={row.id}>
                                     <TableCell onClick={()=>clickPatch(row.id)} >{row.title}</TableCell>
-                                    <TableCell>n/a</TableCell>
+                                    <TableCell>
+
+                                    </TableCell>
                                     <TableCell>{row.date_created}</TableCell>
-                                    <TableCell>n/a</TableCell>
+                                    {/* <TableCell>n/a</TableCell> */}
                                     <TableCell onClick={()=>editPatch(row.id)} >EDIT</TableCell>
                                     <TableCell onClick={()=>deletePatch(row.id)}>DELETE</TableCell>
                                 </TableRow>

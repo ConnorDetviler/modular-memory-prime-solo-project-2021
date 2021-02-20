@@ -53,9 +53,7 @@ function PatchEdit() {
             })
         }
 
-        dispatch({
-            type: 'FETCH_ALL_TAGS'
-        })
+
     }, [])
 
 
