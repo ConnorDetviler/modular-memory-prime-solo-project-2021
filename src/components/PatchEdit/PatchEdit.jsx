@@ -53,6 +53,10 @@ function PatchEdit() {
             })
         }
 
+        dispatch({
+            type: 'FETCH_ALL_TAGS'
+        })
+
 
     }, [])
 
@@ -183,16 +187,20 @@ function PatchEdit() {
         // following logic copies local state into 'shallow state' that can be worked with
         // 'selected' attribute is toggled in shallow state
         let shallowTagList = [...tags];
-        let shallowTag = {...shallowTagList[tagID-1]};
-        shallowTag.selected = !shallowTag.selected
-        shallowTagList[tagID-1] = shallowTag;
+        let shallowTag;
 
-        // local state is replaced with shallow state
-        setTags(shallowTagList);
-        // console.log(shallowTagList)
-
-        setPatch({...patch, tags: shallowTagList})
-
+        for (let i = 0; i < shallowTagList.length; i++) {
+            // finds the tag that was clicked on
+            if (shallowTagList[i].id === tagID) {
+                shallowTag = shallowTagList[i]
+                // flips the selected state on click
+                shallowTag.selected = !shallowTag.selected
+                shallowTagList[i] = shallowTag
+                // local state is replaced with shallow state
+                setTags(shallowTagList);
+                setPatch({...patch, tags: shallowTagList})
+            }
+        }
     }
 
 
