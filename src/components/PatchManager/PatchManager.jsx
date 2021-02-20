@@ -75,7 +75,15 @@ function PatchManager() {
                                 <TableRow key={row.id}>
                                     <TableCell onClick={()=>clickPatch(row.id)} >{row.title}</TableCell>
                                     <TableCell>
-
+                                        {row.tags.map((tag) => {
+                                            return (
+                                                <TagChip
+                                                    tag = {tag}
+                                                    key = {tag.id}
+                                                    selected = {true}
+                                                />
+                                            )
+                                        })}
                                     </TableCell>
                                     <TableCell>{row.date_created}</TableCell>
                                     {/* <TableCell>n/a</TableCell> */}
