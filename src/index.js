@@ -9,6 +9,9 @@ import rootReducer from './redux/reducers/_root.reducer'; // imports ./redux/red
 import rootSaga from './redux/sagas/_root.saga'; // imports ./redux/sagas/index.js
 
 import App from './components/App/App';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { dark } from '@material-ui/core/styles/createPalette';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -31,9 +34,26 @@ const store = createStore(
 // rootSaga contains all of our other sagas
 sagaMiddleware.run(rootSaga);
 
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+    primary: {
+      // moog blue
+      main: "#B4E1F9"
+    },
+    secondary: {
+      // moog green
+      main: "#AEE393"
+    }
+  }
+})
+
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ThemeProvider>,
   document.getElementById('react-root'),
 );

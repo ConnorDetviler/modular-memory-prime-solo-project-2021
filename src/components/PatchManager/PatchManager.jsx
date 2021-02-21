@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import TagChip from '../TagChip/TagChip';
 import { makeStyles } from '@material-ui/core/styles';
+import { palette } from '@material-ui/system';
 import {
     Table,
     TableBody,
@@ -10,7 +11,8 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Paper
+    Paper,
+    Box
 } from '@material-ui/core'
 
 
@@ -54,9 +56,9 @@ function PatchManager() {
 
 
     return (
-        <div>
+        <Box>
             {/* <button onClick = {() => console.log(allPatches)} >test</button> */}
-            <TableContainer component={Paper} >
+            <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -98,7 +100,7 @@ function PatchManager() {
                     </TableBody>
                 </Table>
             </TableContainer>
-        </div>
+        </Box>
     )
 }
 

@@ -13,8 +13,8 @@ function Nav() {
   };
 
   if (user.id != null) {
-    loginLinkData.path = '/user';
-    loginLinkData.text = 'Home';
+    loginLinkData.path = '/patch-view/0';
+    loginLinkData.text = 'Patch View';
   }
 
   return (
@@ -30,9 +30,9 @@ function Nav() {
 
         {user.id && (
           <>
-            <Link className="navLink" to="/patch-view/0">
+            {/* <Link className="navLink" to="/patch-view/0">
               Patch View
-            </Link>
+            </Link> */}
 
             <Link className="navLink" to="/patch-edit/0">
               Patch Edit
