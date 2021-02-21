@@ -1,57 +1,82 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import {useSelector} from 'react-redux';
 
+import { makeStyles } from '@material-ui/core/styles';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  MenuIcon,
+  Tabs,
+  Tab
+} from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
+
 function Nav() {
+  const classes = useStyles();
+
   const user = useSelector((store) => store.user);
 
-  let loginLinkData = {
-    path: '/login',
-    text: 'Login / Register',
+  const history = useHistory();
+
+  const tabNameToIndex = {
+    0: "patch-view/0",
+    1: "patch-edit/0",
+    2: "patch-manager",
+    3: "about"
   };
 
-  if (user.id != null) {
-    loginLinkData.path = '/patch-view/0';
-    loginLinkData.text = 'Patch View';
+
+  const [selectedTab, setSelectedTab] = useState(0)
+
+  const handleTabChange = (event, newValue) => {
+    history.push(`/${tabNameToIndex[newValue]}`)
+    setSelectedTab(newValue)
   }
 
   return (
-    <div className="nav">
-      <Link to="/patch-view/0">
-        <h2 className="nav-title">Modular Memory</h2>
-      </Link>
-      <div>
-
-        <Link className="navLink" to={loginLinkData.path}>
-          {loginLinkData.text}
-        </Link>
-
+    <div className="classes.root">
+      <AppBar position="static" color="primary">
+        <Button>
+            <Typography variant="h4" className="classes.title">Modular Memory</Typography>
+          <Link to="/patch-view/0">
+          </Link>
+        </Button>
         {user.id && (
-          <>
-            {/* <Link className="navLink" to="/patch-view/0">
-              Patch View
-            </Link> */}
 
-            <Link className="navLink" to="/patch-edit/0">
-              Patch Edit
-            </Link>
+          <Tabs value={selectedTab} onChange={handleTabChange} >
 
-            <Link className="navLink" to="/patch-manager">
-              Patch Manager
-            </Link>
-            {/* <Link className="navLink" to="/info">
-              Info Page
-            </Link> */}
-            <LogOutButton className="navLink" />
-          </>
-        )}
+          <Tab label="Patch View" />
+          <Tab label="Patch Edit" />
+          <Tab label="Patch Manager" />
+          <Tab label="About" />
 
-        <Link className="navLink" to="/about">
-          About
-        </Link>
-      </div>
+          {user.id && (
+            <>
+              <LogOutButton className="navLink" />
+            </>
+          )}
+
+        </Tabs>
+      )}
+      </AppBar>
     </div>
   );
 }

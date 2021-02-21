@@ -28,8 +28,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             WHERE "patch_id" = $1;
         `;
 
-        function sendData() {
-            res.send(patchesArr)
+        function sendData(dataToSend) {
+            // console.log(dataToSend)
+            res.send(dataToSend)
         }
 
         // does a query for each patch in the result.rows from last query to get it's tags
@@ -42,7 +43,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
                 // when loop is finished:
                 if (i === patchesArr.length - 1) {
-                    sendData()
+                    sendData(patchesArr)
                 }
             })
             .catch((err) => {
