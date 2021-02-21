@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 
 function LoginForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('Hans Zimmer');
+  const [password, setPassword] = useState('bladerunner');
   const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
 

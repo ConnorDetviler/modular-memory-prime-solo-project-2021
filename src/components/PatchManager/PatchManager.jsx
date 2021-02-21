@@ -70,12 +70,15 @@ function PatchManager() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {allPatches.map((row) => {
+                        {allPatches?.map((row) => {
+
+                            let date = row.date_created.slice(0, 10);
+
                             return (
                                 <TableRow key={row.id}>
                                     <TableCell onClick={()=>clickPatch(row.id)} >{row.title}</TableCell>
                                     <TableCell>
-                                        {row.tags.map((tag) => {
+                                        {row.tags?.map((tag) => {
                                             return (
                                                 <TagChip
                                                     tag = {tag}
@@ -85,7 +88,7 @@ function PatchManager() {
                                             )
                                         })}
                                     </TableCell>
-                                    <TableCell>{row.date_created}</TableCell>
+                                    <TableCell>{date}</TableCell>
                                     {/* <TableCell>n/a</TableCell> */}
                                     <TableCell onClick={()=>editPatch(row.id)} >EDIT</TableCell>
                                     <TableCell onClick={()=>deletePatch(row.id)}>DELETE</TableCell>
