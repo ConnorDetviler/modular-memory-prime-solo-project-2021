@@ -39,11 +39,11 @@ const theme = createMuiTheme({
     type: 'dark',
     primary: {
       // moog blue
-      main: "#B4E1F9"
+      main: "#94c7e3"
     },
     secondary: {
       // moog green
-      main: "#AEE393"
+      main: "#9ede7e"
     }
   }
 })

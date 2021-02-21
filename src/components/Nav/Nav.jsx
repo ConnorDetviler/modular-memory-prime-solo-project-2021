@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import {useSelector} from 'react-redux';
@@ -32,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
 function Nav() {
   const classes = useStyles();
 
+  const location = useLocation();
+  const loc = location.pathname;
+  console.log(loc)
+
   const user = useSelector((store) => store.user);
 
   const history = useHistory();
@@ -43,8 +47,22 @@ function Nav() {
     3: "about"
   };
 
+  const currentLocation = () => {
+    switch (true) {
+      case loc.includes("patch-view"):
+        return 0;
+      case loc.includes("patch-edit"):
+        return 1;
+      case loc.includes("patch-manager"):
+        return 2;
+      case loc.includes("about"):
+        return 3;
+    }
 
-  const [selectedTab, setSelectedTab] = useState(0)
+  }
+
+
+  const [selectedTab, setSelectedTab] = useState(currentLocation())
 
   const handleTabChange = (event, newValue) => {
     history.push(`/${tabNameToIndex[newValue]}`)
