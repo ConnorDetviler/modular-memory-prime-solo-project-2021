@@ -12,7 +12,8 @@ import {
     TableHead,
     TableRow,
     Paper,
-    Box
+    Box,
+    Button
 } from '@material-ui/core'
 
 
@@ -53,6 +54,13 @@ function PatchManager() {
         });
     }
 
+    const useStyles = makeStyles((theme) => ({
+        rowButton: {
+            textTransform: "none",
+        }
+    }))
+
+    const classes = useStyles();
 
 
     return (
@@ -80,7 +88,15 @@ function PatchManager() {
 
                             return (
                                 <TableRow key={row.id}>
-                                    <TableCell onClick={()=>clickPatch(row.id)} >{row.title}</TableCell>
+                                    {/* <TableCell onClick={()=>clickPatch(row.id)} >{row.title}</TableCell> */}
+                                    <TableCell>
+                                        <Button
+                                        onClick={()=>clickPatch(row.id)}
+                                        className={classes.rowButton}
+                                        >
+                                            {row.title}
+                                        </Button>
+                                    </TableCell>
                                     <TableCell>
                                         {row.tags?.map((tag) => {
                                             return (
@@ -94,8 +110,22 @@ function PatchManager() {
                                     </TableCell>
                                     <TableCell>{date}</TableCell>
                                     {/* <TableCell>n/a</TableCell> */}
-                                    <TableCell onClick={()=>editPatch(row.id)} >EDIT</TableCell>
-                                    <TableCell onClick={()=>deletePatch(row.id)}>DELETE</TableCell>
+                                    <TableCell>
+                                        <Button
+                                        variant="outlined"
+                                        onClick={()=>editPatch(row.id)}
+                                        >EDIT</Button>
+                                    </TableCell>
+
+                                    <TableCell>
+                                        <Button
+                                        variant="outlined"
+                                        onClick={()=>deletePatch(row.id)}
+                                        >
+                                            DELETE
+                                        </Button>
+                                    </TableCell>
+
                                 </TableRow>
                             )
                         })}

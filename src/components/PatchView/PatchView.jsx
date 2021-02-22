@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     editButton: {
         margin: theme.spacing(1),
 
+    },
+    ListItemStyle: {
+        padding: theme.spacing(1.5)
     }
 }));
 
@@ -91,10 +94,12 @@ function PatchView() {
                             {patchNames.map(patch => {
                                 return (
                                     <ListItem
+                                        className={classes.ListItemStyle}
+                                        button
                                         key={patch.id}
                                         onClick={() => patchClick(patch.id)}
                                     >
-                                        {patch.title}
+                                        <ListItemText primary={patch.title} />
                                     </ListItem>
                                 )
                             })}
