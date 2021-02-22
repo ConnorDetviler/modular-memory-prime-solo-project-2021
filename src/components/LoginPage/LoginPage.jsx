@@ -21,7 +21,7 @@ function LoginPage() {
           Register
         </button>
         <br/>
-        <Link to="/about">
+        <Link className="btn_asLink" to="/about">
         About
         </Link>
       </center>

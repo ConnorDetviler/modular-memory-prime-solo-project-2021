@@ -34,7 +34,7 @@ Button
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: rgb(83, 192, 194);
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
@@ -69,7 +69,7 @@ Button
   border-radius: 0;
   background: none;
   font: inherit;
-  color: #444;
+  color: rgb(122, 121, 121);
 }
 
 .btn_asLink:hover {
@@ -102,10 +102,11 @@ Form Treatment
   width: 400px;
   max-width: 100%;
   padding: 25px;
-  margin: 0 auto 20px;
-  background-color: #efefef;
+  margin: 100px auto 20px;
+  background-color: #7dbadb;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+  color: black !important;
 }
 
 input {
