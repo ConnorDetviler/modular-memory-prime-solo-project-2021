@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import TagChip from '../TagChip/TagChip';
 
+import { makeStyles } from '@material-ui/styles';
 import {
     Box,
     Container,
-    TextField
+    TextField,
+    Button,
+    Paper
     } from '@material-ui/core'
 
 
@@ -211,80 +214,134 @@ function PatchEdit() {
 
 
 
+    const useStyles = makeStyles((theme) => ({
+        FieldStyle: {
+            margin: theme.spacing(1),
+            width: '40ch'
+        },
+        TextAreaStyle: {
+            margin: theme.spacing(1),
+            width: '80ch'
+        },
+        SaveButtonStyle: {
+            margin: theme.spacing(1),
+            marginTop: theme.spacing(2)
+        },
+        TagButtonStyle: {
+            margin: theme.spacing(1),
+            marginTop: theme.spacing(3)
+        },
+        alignItemsAndJustifyContent: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+    }))
+
+    const classes = useStyles();
+
     return (
         <Box
             p={15}
+            className={classes.alignItemsAndJustifyContent}
         >
-            <Container>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="title"
-                        value={patch?.title}
-                        onChange={handleChange}
-                        name="title"
-                    />
-                    <input
-                        type="text"
-                        placeholder="patch image url"
-                        value={patch?.patch_image}
-                        onChange={handleChange}
-                        name="patch_image"
-                    />
-                    <textarea
-                        placeholder="patch notes"
-                        value={patch?.patch_notes}
-                        onChange={handleChange}
-                        name="patch_notes"
-                    />
-                    <input
-                        type="submit"
-                        value="Save"
-                    />
-                </form>
+            <Paper elevation={5}>
+                <Box p={3}>
+                    <form onSubmit={handleSubmit}>
+                        <TextField
+                            className={classes.FieldStyle}
+                            type="text"
+                            label="title"
+                            value={patch?.title}
+                            onChange={handleChange}
+                            name="title"
+                        />
+                        <TextField
+                            className={classes.FieldStyle}
+                            type="text"
+                            label="patch image url"
+                            value={patch?.patch_image}
+                            onChange={handleChange}
+                            name="patch_image"
+                        />
+                        <Button
+                            className={classes.SaveButtonStyle}
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                        >
+                            Save Patch
+                        </Button>
+                        <br/>
+                        <TextField
+                            className={classes.TextAreaStyle}
+                            label="patch notes"
+                            multiline
+                            rows={8}
+                            value={patch?.patch_notes}
+                            onChange={handleChange}
+                            name="patch_notes"
+                            variant="outlined"
+                        />
+                    </form>
 
-                <br/>
+                    <br/>
 
-                <form onSubmit={createTag}>
-                    <input
-                        type="text"
-                        placeholder="new tag"
-                        name="name"
-                        value={newTag}
-                        onChange={handleChangeTag}
-                    />
+                    <div>
+                        {tags?.map(tag => {
+                                    return (
+                                        <TagChip
+                                            key={tag.id}
+                                            tag={tag}
+                                            selectable={true}
+                                            selected={tag.selected}
+                                            onClick={() => tagClick(tag.id)}
+                                        />
+                                    )
+                                })}
+                    </div>
 
-                    <input
-                        type="submit"
-                        value="Create Tag"
-                    />
-                </form>
+                    <form onSubmit={createTag}>
+                        <TextField
+                            className={classes.FieldStyle}
+                            type="text"
+                            label="new tag"
+                            name="name"
+                            value={newTag}
+                            onChange={handleChangeTag}
+                        />
 
-                <div>
-                    {tags?.map(tag => {
-                                return (
-                                    <TagChip
-                                        key={tag.id}
-                                        tag={tag}
-                                        selectable={true}
-                                        selected={tag.selected}
-                                        onClick={() => tagClick(tag.id)}
-                                    />
-                                )
-                            })}
-                </div>
+                        <Button
+                            type="submit"
+                            value="Create Tag"
+                            color="secondary"
+                            variant="contained"
+                            size="small"
+                            className={classes.TagButtonStyle}
+                        >
+                            Create Tag
+                        </Button>
 
-                <img src={patch.patch_image} />
+                    </form>
 
-                {/* <button onClick={
-                    () => console.log(patch)
-                }>console log patch</button>
+                    <br/>
 
-                <button onClick={
-                    () => console.log(tags)
-                }>console log tags</button> */}
+
+                    <br/>
+
+                    <img src={patch.patch_image} />
+
+                    {/* <button onClick={
+                        () => console.log(patch)
+                    }>console log patch</button>
+
+                    <button onClick={
+                        () => console.log(tags)
+                    }>console log tags</button> */}
+                    
+                </Box>
                 
-            </Container>
+            </Paper>
         </Box>
     )
 }
