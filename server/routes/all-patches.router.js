@@ -42,6 +42,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                 if (i === patchesArr.length - 1) {
                     sendData(patchesArr)
                 }
+
             })
             .catch((err) => {
                 console.log(`Error completing SELECT in tag query within all-patches`, err)
@@ -49,10 +50,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         }
 
         // does a query for each patch in the result.rows from last query to get it's tags
-        for (let i = 0; i < patchesArr.length; i++) {
-            getTags(i)
+
+            for (let i = 0; i < patchesArr.length; i++) {
+                ctagsFromServer = getTags(i)
+            }
         }
-    })
+    )
     .catch((err) => {
         console.error("Error completing SELECT all patches query", err);
         res.sendStatus(500)
