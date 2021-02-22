@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux'
 import { Button } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import {
-  Box
+  Box,
+  Typography
 } from '@material-ui/core';
 
 // This is one of our simplest components
@@ -20,9 +21,12 @@ function AboutPage() {
     <Box
     className="container"
     pt={13}
+    maxWidth="600px"
     >
       <div>
-        <p>This about page is for anyone to read!</p>
+        <Typography>Modular Memory is an app designed to make any synthesist's life easier. To upload a patch, 
+          simply navigate to the patch-edit tab, use your favorite image hosting service, and link a photograph
+          of your synthesizer's front panel with all of the switch, knob, and patch cable connections clearly visible</Typography>
       </div>
 
       {!user.id && (

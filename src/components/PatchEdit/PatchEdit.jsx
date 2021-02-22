@@ -263,6 +263,7 @@ function PatchEdit() {
                             value={patch?.patch_image}
                             onChange={handleChange}
                             name="patch_image"
+
                         />
                         <Button
                             className={classes.SaveButtonStyle}
@@ -282,8 +283,18 @@ function PatchEdit() {
                             onChange={handleChange}
                             name="patch_notes"
                             variant="outlined"
+
                         />
                     </form>
+                    {/* <Button
+                    onClick={() => setPatch({title: 'BladeGrandma 2077'})}
+                    ></Button>
+                    <Button
+                    onClick={() => setPatch({patch_image: 'https://i.imgur.com/Gj5fDob.jpg'})}
+                    ></Button>
+                    <Button
+                    onClick={() => setPatch({patch_notes: 'adjust mod wheel for extra warble'})}
+                    ></Button> */}
 
                     <br/>
 
