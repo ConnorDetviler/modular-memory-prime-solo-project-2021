@@ -15,7 +15,7 @@ function TagChip({tag, selectable, selected, onClick}) {
                     :
                     "outlined"
                 }
-                color="primary"
+                color="secondary"
                 onClick={onClick}
                 clickable={selectable}
             />

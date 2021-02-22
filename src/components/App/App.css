@@ -4,8 +4,10 @@ body,
   height: 100%;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0px;
 }
 

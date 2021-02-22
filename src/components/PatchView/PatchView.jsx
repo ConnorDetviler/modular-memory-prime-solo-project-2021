@@ -13,14 +13,20 @@ import {
     ListItem,
     ListItemText,
     Chip,
-    makeStyles
+    Drawer,
+    CssBaseline,
+    makeStyles,
+    Typography
         } from '@material-ui/core';
+
+const drawerWidth = 1000;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
+        // width: '100%',
+        // maxWidth: 360,
+        // backgroundColor: theme.palette.background.paper,
+        display: 'flex',
     },
 }));
 
@@ -65,24 +71,35 @@ function PatchView() {
     }
 
     return (
-        <div>
+        <div className={classes.root}>
             <Container>
                 <div>
-                    <List>
-                        {patchNames.map(patch => {
-                            return (
-                                <ListItem
-                                    key={patch.id}
-                                    onClick={() => patchClick(patch.id)}
-                                >
-                                    {patch.title}
-                                </ListItem>
-                            )
-                        })}
-                    </List>
+                    <Drawer
+                        variant="permanent"
+                        anchor="left"
+                        style={{position:'fixed', zIndex: 1}}
+                    >
+                        <List
+                            position="static"
+                            style={{paddingTop: '120px'}}
+                        >
+                            {patchNames.map(patch => {
+                                return (
+                                    <ListItem
+                                        key={patch.id}
+                                        onClick={() => patchClick(patch.id)}
+                                    >
+                                        {patch.title}
+                                    </ListItem>
+                                )
+                            })}
+                        </List>
+                    </Drawer>
                 </div>
                 {patchLoadID !== 0
-                ?   <>
+                ?   <Box
+                        p={15}
+                    >
                         <h1>{patchDetails.title}</h1>
                         <img src={patchDetails.patch_image} />
                         <p>{patchDetails.patch_notes}</p>
@@ -99,9 +116,24 @@ function PatchView() {
                         })}
                         {/* <button onClick={() => console.log(patchDetails)}>test</button> */}
                         </div>
-                        <Button onClick={() => history.push(`/patch-edit/${patchLoadID}`)}>Edit</Button>
-                    </>
-                : <p>Welcome :)</p>
+                        <Button
+                        onClick={() => history.push(`/patch-edit/${patchLoadID}`)}
+                        variant="outlined"
+                        color="moogYellow"
+                        >Edit
+                        </Button>
+                    </Box>
+                :
+                <Box
+                    p={15}
+                    pt={30}
+                    textAlign="center"
+                >
+                    <Typography
+                        variant="h3"
+                    >Welcome to Modular Memory
+                    </Typography>
+                </Box>
                 }
 
             </Container>

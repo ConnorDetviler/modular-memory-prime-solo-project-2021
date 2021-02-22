@@ -34,16 +34,27 @@ const store = createStore(
 // rootSaga contains all of our other sagas
 sagaMiddleware.run(rootSaga);
 
+const font = "'Montserrat', sans-serif";
+
 const theme = createMuiTheme({
+  typography: {
+    fontFamily: font
+  },
   palette: {
     type: 'dark',
     primary: {
       // moog blue
-      main: "#94c7e3"
+      main: "#7dbadb"
     },
     secondary: {
       // moog green
       main: "#9ede7e"
+    },
+    moogYellow: {
+      main: "#f2ec72"
+    },
+    moogRed: {
+      main: "#f0595e"
     }
   }
 })

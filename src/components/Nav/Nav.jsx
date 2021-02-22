@@ -71,15 +71,13 @@ function Nav() {
 
   return (
     <div className="classes.root">
-      <AppBar position="static" color="primary">
-        <Button>
-            <Typography variant="h4" className="classes.title">Modular Memory</Typography>
-          <Link to="/patch-view/0">
-          </Link>
-        </Button>
+      <AppBar position="absolute" color="primary" style={{zIndex: 24}}>
+
+          <Typography align="center" color="textSecondary" variant="h4" className="classes.title">Modular Memory</Typography>
+
         {user.id && (
 
-          <Tabs value={selectedTab} onChange={handleTabChange} >
+          <Tabs centered value={selectedTab} onChange={handleTabChange} >
 
           <Tab label="Patch View" />
           <Tab label="Patch Edit" />

@@ -2,6 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux'
 import { Button } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
+import {
+  Box
+} from '@material-ui/core';
 
 // This is one of our simplest components
 // It doesn't have local state,
@@ -14,7 +17,10 @@ function AboutPage() {
   const history = useHistory();
 
   return (
-    <div className="container">
+    <Box
+    className="container"
+    pt={13}
+    >
       <div>
         <p>This about page is for anyone to read!</p>
       </div>
@@ -23,7 +29,7 @@ function AboutPage() {
         <Button onClick={() => history.push('/')} variant="outlined">Back to Login</Button>
       )}
 
-    </div>
+    </Box>
   );
 }
 

@@ -3,6 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import TagChip from '../TagChip/TagChip';
 
+import {
+    Box,
+    Container,
+    TextField
+    } from '@material-ui/core'
+
 
 function PatchEdit() {
 
@@ -206,75 +212,80 @@ function PatchEdit() {
 
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="title"
-                    value={patch?.title}
-                    onChange={handleChange}
-                    name="title"
-                />
-                <input
-                    type="text"
-                    placeholder="patch image url"
-                    value={patch?.patch_image}
-                    onChange={handleChange}
-                    name="patch_image"
-                />
-                <textarea
-                    placeholder="patch notes"
-                    value={patch?.patch_notes}
-                    onChange={handleChange}
-                    name="patch_notes"
-                />
-                <input
-                    type="submit"
-                    value="Save"
-                />
-            </form>
+        <Box
+            p={15}
+        >
+            <Container>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        placeholder="title"
+                        value={patch?.title}
+                        onChange={handleChange}
+                        name="title"
+                    />
+                    <input
+                        type="text"
+                        placeholder="patch image url"
+                        value={patch?.patch_image}
+                        onChange={handleChange}
+                        name="patch_image"
+                    />
+                    <textarea
+                        placeholder="patch notes"
+                        value={patch?.patch_notes}
+                        onChange={handleChange}
+                        name="patch_notes"
+                    />
+                    <input
+                        type="submit"
+                        value="Save"
+                    />
+                </form>
 
-            <br/>
+                <br/>
 
-            <form onSubmit={createTag}>
-                <input
-                    type="text"
-                    placeholder="new tag"
-                    name="name"
-                    value={newTag}
-                    onChange={handleChangeTag}
-                />
+                <form onSubmit={createTag}>
+                    <input
+                        type="text"
+                        placeholder="new tag"
+                        name="name"
+                        value={newTag}
+                        onChange={handleChangeTag}
+                    />
 
-                <input
-                    type="submit"
-                    value="Create Tag"
-                />
-            </form>
+                    <input
+                        type="submit"
+                        value="Create Tag"
+                    />
+                </form>
 
-            <div>
-                {tags?.map(tag => {
-                            return (
-                                <TagChip
-                                    key={tag.id}
-                                    tag={tag}
-                                    selectable={true}
-                                    selected={tag.selected}
-                                    onClick={() => tagClick(tag.id)}
-                                />
-                            )
-                        })}
-            </div>
+                <div>
+                    {tags?.map(tag => {
+                                return (
+                                    <TagChip
+                                        key={tag.id}
+                                        tag={tag}
+                                        selectable={true}
+                                        selected={tag.selected}
+                                        onClick={() => tagClick(tag.id)}
+                                    />
+                                )
+                            })}
+                </div>
 
-            <img src={patch.patch_image} />
+                <img src={patch.patch_image} />
 
-            {/* <button onClick={
-                () => console.log(patch)
-            }>console log patch</button>
+                {/* <button onClick={
+                    () => console.log(patch)
+                }>console log patch</button>
 
-            <button onClick={
-                () => console.log(tags)
-            }>console log tags</button> */}
-        </div>
+                <button onClick={
+                    () => console.log(tags)
+                }>console log tags</button> */}
+                
+            </Container>
+        </Box>
     )
 }
 

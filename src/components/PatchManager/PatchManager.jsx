@@ -56,7 +56,9 @@ function PatchManager() {
 
 
     return (
-        <Box>
+        <Box
+            pt={13}
+        >
             {/* <button onClick = {() => console.log(allPatches)} >test</button> */}
             <TableContainer component={Paper}>
                 <Table>
