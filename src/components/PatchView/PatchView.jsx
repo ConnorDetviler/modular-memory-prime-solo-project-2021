@@ -16,7 +16,8 @@ import {
     Drawer,
     CssBaseline,
     makeStyles,
-    Typography
+    Typography,
+    Paper
         } from '@material-ui/core';
 
 const drawerWidth = 1000;
@@ -28,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
         // backgroundColor: theme.palette.background.paper,
         display: 'flex',
     },
+    editButton: {
+        margin: theme.spacing(1),
+
+    }
 }));
 
 
@@ -98,30 +103,38 @@ function PatchView() {
                 </div>
                 {patchLoadID !== 0
                 ?   <Box
-                        p={15}
+                        pt={15}
+                        pl={15}
                     >
-                        <h1>{patchDetails.title}</h1>
-                        <img src={patchDetails.patch_image} />
-                        <p>{patchDetails.patch_notes}</p>
-                        <div>
-                        {patchDetails?.tags?.map(tag => {
-                            return (
-                                <TagChip
-                                    key={tag.id}
-                                    tag={tag}
-                                    selectable={false}
-                                    selected={true}
-                                />
-                            )
-                        })}
-                        {/* <button onClick={() => console.log(patchDetails)}>test</button> */}
-                        </div>
-                        <Button
-                        onClick={() => history.push(`/patch-edit/${patchLoadID}`)}
-                        variant="outlined"
-                        color="moogYellow"
-                        >Edit
-                        </Button>
+                        <Paper>
+                            <Box
+                                p={2}
+                            >
+                                <h1>{patchDetails.title}</h1>
+                                <img src={patchDetails.patch_image} />
+                                <Typography multiline variant="body1" display="inline" >{patchDetails.patch_notes}</Typography>
+                                <div>
+                                {patchDetails?.tags?.map(tag => {
+                                    return (
+                                        <TagChip
+                                            key={tag.id}
+                                            tag={tag}
+                                            selectable={false}
+                                            selected={true}
+                                        />
+                                    )
+                                })}
+                                {/* <button onClick={() => console.log(patchDetails)}>test</button> */}
+                                </div>
+                                <Button
+                                onClick={() => history.push(`/patch-edit/${patchLoadID}`)}
+                                variant="contained"
+                                color="primary"
+                                className={classes.editButton}
+                                >Edit
+                                </Button>
+                            </Box>
+                        </Paper>
                     </Box>
                 :
                 <Box
