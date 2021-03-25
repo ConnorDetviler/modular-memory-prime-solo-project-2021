@@ -12,6 +12,8 @@ This is where my app, Modular Memory comes in. Modular Memory is a place to save
 
 ## Screen Shot
 ![image of Patch View](patch_view.png)
+![image of Patch Edit](patch_edit.png)
+![image of Patch Manager](patch_manager.png)
 
 ### Prerequisites
 
