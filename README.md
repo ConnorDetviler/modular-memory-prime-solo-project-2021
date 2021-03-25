@@ -11,7 +11,7 @@ This method of synthesis is extremely powerful and also very fun, but the major 
 This is where my app, Modular Memory comes in. Modular Memory is a place to save those pictures that you have taken with all of the knobs, switches, and patch cables in place. Not just that, but also label them, associate them with custom tags for categorization, and give them descriptions and notes to follow.
 
 ## Screen Shot
-
+![image of Patch View](patch_view.png)
 
 ### Prerequisites
 
