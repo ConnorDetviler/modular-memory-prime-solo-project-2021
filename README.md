@@ -1,4 +1,4 @@
-# Modular Memory.
+# Modular Memory
 
 ## Description
 
